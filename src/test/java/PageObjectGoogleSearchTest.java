@@ -15,7 +15,7 @@ public class PageObjectGoogleSearchTest {
 
     @Test
     public void verifyDisplayedResultsQuantity_PO() {
-        new GoogleHomePage().open().search("funny kittens");
+        new GoogleHomePage().open().search("funny dogs");
         GoogleSearchResultPage.getDisplayedResultsQuantity(9);
     }
 

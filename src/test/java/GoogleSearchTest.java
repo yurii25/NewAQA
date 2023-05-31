@@ -38,9 +38,9 @@ public class GoogleSearchTest {
 
         open("https://www.google.com/");
 
-        $(By.name("q")).setValue("funny kitten").pressEnter();
+        $(By.name("q")).setValue("funny dogs").pressEnter();
 
-        ElementsCollection collection = $$x("//div[@class='DhN8Cf']").shouldHave(size(9));
+        ElementsCollection collection = $$x("// h3[@class='LC20lb MBeuO DKV0Md']").shouldHave(size(9));
 
 //        System.out.println(collection.size());
 //        Чому, якщо для collection забрати ".shouldHave(size(9))" метод, то "collection.size()" повертає 0?
