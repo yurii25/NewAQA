@@ -25,5 +25,6 @@ public class PageObjectGoogleSearchTest {
         Assert.assertTrue(searchResultPage.getFirstSearchResultText().contains("Selene"));
         GoogleHomePage.goBackToHomePage();
         Assert.assertTrue(webdriver().driver().url().contains("https://www.google.com/webhp?hl="));
+
     }
 }
