@@ -1,9 +1,30 @@
 import PageOblects.*;
+import com.codeborne.selenide.Configuration;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static com.codeborne.selenide.Selenide.$x;
 public class RozetkaTest {
+
+    @BeforeClass
+    public void beforeTestClass(){
+        System.out.println("The Rozetka tests started");
+    }
+
+    @AfterClass
+    public void afterTestClass(){
+        System.out.println("The Rozetka tests ended");
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
+        System.out.println("The single test has started");
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        Configuration.holdBrowserOpen = true;
+    }
 
     @Test
     public void verifyProductSearchDetails() {
