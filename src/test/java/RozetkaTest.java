@@ -3,7 +3,6 @@ import com.codeborne.selenide.Configuration;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import static com.codeborne.selenide.Selenide.$x;
 public class RozetkaTest {
 
     @BeforeClass
