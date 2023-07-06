@@ -15,8 +15,8 @@ public class RozetkaSearchResultPage extends PageWithHeader {
         return new RozetkaSearchResultPage();
     }
 
-    public static RozetkaSearchResultPage addToTheBasket(Integer cartIconForParticularProduct ) {
-        $x(String.format("(//button[@class='buy-button goods-tile__buy-button ng-star-inserted']) [%s]", cartIconForParticularProduct)).click();
+    public static RozetkaSearchResultPage addToTheBasket(Integer cartIconForParticularProductNumber ) {
+        $x(String.format("(//button[@class='buy-button goods-tile__buy-button ng-star-inserted']) [%s]", cartIconForParticularProductNumber)).click();
         return new RozetkaSearchResultPage();
     }
 
