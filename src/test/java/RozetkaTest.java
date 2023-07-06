@@ -35,13 +35,11 @@ public class RozetkaTest {
 
         resultPage.verifyQuantityOfResults(5);
 
-        var priceOnTheSearchResultsPage = resultPage
-                .priceOfTheParticularSearhResult($x("(//div[@class='goods-tile ng-star-inserted']) [3] " +
-                        "//span[@class='goods-tile__price-value']"));
+        var priceOnTheSearchResultsPage = resultPage.priceOfTheParticularSearhResult(3);
 
-        resultPage.openParticularProduct($x("(//div[@class='goods-tile__inner']) [3] "));
+        resultPage.openParticularProduct(3);
 
-        var priceOnTheProductPage = ProductPage.getProductPrice($x("//p[@class='product-price__big product-price__big-color-red']"));
+        var priceOnTheProductPage = ProductPage.getProductPrice();
 
         Assert.assertEquals(priceOnTheProductPage, priceOnTheSearchResultsPage);
     }
@@ -67,22 +65,18 @@ public class RozetkaTest {
         resultPage.verifyQuantityOfResults(10);
 
         var priceOnTheSearchResultsPage = resultPage
-                .priceOfTheParticularSearhResult($x("(//span[@class='goods-tile__price-value']) [6]"));
+                .priceOfTheParticularSearhResult(5);
 
         var nameOnTheSearchResultsPage = resultPage
-                .nameOfTheParticularSearhResult($x("(//a[@class='goods-tile__heading ng-star-inserted']) " +
-                        "[6]"));
+                .nameOfTheParticularSearhResult(5);
 
-        RozetkaSearchResultPage.addToTheBasket($x("(//button[@class='buy-button goods-tile__buy-button " +
-                "ng-star-inserted']) [6]"));
+        RozetkaSearchResultPage.addToTheBasket(5);
 
         resultPage.clickOnBasketIcon();
 
-        var priceOnTheBasketModal = BasketModal.priceOfTheParticularProductInBasket(
-                $x("//div[@class='cart-receipt__sum-price']"));
+        var priceOnTheBasketModal = BasketModal.priceOfTheParticularProductInBasket();
 
-        var nameOnTheBasketModal = BasketModal.nameOfTheParticularProductInBasket(
-                $x("//div[@class='cart-product__main']"));
+        var nameOnTheBasketModal = BasketModal.nameOfTheParticularProductInBasket();
 
         Assert.assertEquals(priceOnTheSearchResultsPage, priceOnTheBasketModal);
         Assert.assertEquals(nameOnTheSearchResultsPage, nameOnTheBasketModal);
