@@ -8,7 +8,7 @@ public class RozetkaHomePage extends PageWithHeader {
 
     public RozetkaHomePage open() {
         Configuration.browser = "chrome";
-        Configuration.holdBrowserOpen = true;
+//        Configuration.holdBrowserOpen = true;
         Selenide.open("https://rozetka.com.ua/ua/");
         return this;
     }

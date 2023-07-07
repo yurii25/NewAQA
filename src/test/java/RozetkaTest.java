@@ -1,30 +1,29 @@
 import PageOblects.*;
+import com.codeborne.selenide.Configuration;
 import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import static com.codeborne.selenide.Selenide.$x;
-
-/*
-"- Open http://rozetka.com.ua home page
-- Search for ‘iPhone’
-- Verify that at least 5 result links are displayed and that each link text contains 'iPhone'
-- Verify the 3rd product has a price, save the price
-- Click on the 3rd product and verify that the stored price and price on product page is equal
-
-- Open http://rozetka.com.ua home page
-- Click on the user icon in the top right corner
-- Verify that the login modal is displayed
-- Close the login modal, verify it’s closed
-
-- Open http://rozetka.com.ua home page
-- Search for ‘dell’
-- Verify that at least 10 result links are displayed
-- Save the name and the price of 5th product, add it to the basket
-- Verify the basket modal is opened and the price and name are correct
-
-Create PR and assing toleksyn as reviewer."
- */
 public class RozetkaTest {
+
+    @BeforeClass
+    public void beforeTestClass(){
+        System.out.println("The Rozetka tests started");
+    }
+
+    @AfterClass
+    public void afterTestClass(){
+        System.out.println("The Rozetka tests ended");
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
+        System.out.println("The single test has started");
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        Configuration.holdBrowserOpen = true;
+    }
 
     @Test
     public void verifyProductSearchDetails() {
@@ -35,13 +34,11 @@ public class RozetkaTest {
 
         resultPage.verifyQuantityOfResults(5);
 
-        var priceOnTheSearchResultsPage = resultPage
-                .priceOfTheParticularSearhResult($x("(//div[@class='goods-tile ng-star-inserted']) [3] " +
-                        "//span[@class='goods-tile__price-value']"));
+        var priceOnTheSearchResultsPage = resultPage.priceOfTheParticularSearhResult(3);
 
-        resultPage.openParticularProduct($x("(//div[@class='goods-tile__inner']) [3] "));
+        resultPage.openParticularProduct(3);
 
-        var priceOnTheProductPage = ProductPage.getProductPrice($x("//p[@class='product-price__big product-price__big-color-red']"));
+        var priceOnTheProductPage = ProductPage.getProductPrice();
 
         Assert.assertEquals(priceOnTheProductPage, priceOnTheSearchResultsPage);
     }
@@ -67,22 +64,18 @@ public class RozetkaTest {
         resultPage.verifyQuantityOfResults(10);
 
         var priceOnTheSearchResultsPage = resultPage
-                .priceOfTheParticularSearhResult($x("(//span[@class='goods-tile__price-value']) [6]"));
+                .priceOfTheParticularSearhResult(5);
 
         var nameOnTheSearchResultsPage = resultPage
-                .nameOfTheParticularSearhResult($x("(//a[@class='goods-tile__heading ng-star-inserted']) " +
-                        "[6]"));
+                .nameOfTheParticularSearhResult(5);
 
-        RozetkaSearchResultPage.addToTheBasket($x("(//button[@class='buy-button goods-tile__buy-button " +
-                "ng-star-inserted']) [6]"));
+        RozetkaSearchResultPage.addToTheBasket(5);
 
         resultPage.clickOnBasketIcon();
 
-        var priceOnTheBasketModal = BasketModal.priceOfTheParticularProductInBasket(
-                $x("//div[@class='cart-receipt__sum-price']"));
+        var priceOnTheBasketModal = BasketModal.priceOfTheParticularProductInBasket();
 
-        var nameOnTheBasketModal = BasketModal.nameOfTheParticularProductInBasket(
-                $x("//div[@class='cart-product__main']"));
+        var nameOnTheBasketModal = BasketModal.nameOfTheParticularProductInBasket();
 
         Assert.assertEquals(priceOnTheSearchResultsPage, priceOnTheBasketModal);
         Assert.assertEquals(nameOnTheSearchResultsPage, nameOnTheBasketModal);
